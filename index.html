@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be the First One – NexKirana</title>
+  <style>
+    body {
+      background: url('back3.jpg') no-repeat center center;
+      background-size: cover;
+      background-attachment: fixed;
+      background-position: center;
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #ffffff; 
+    }
+    .container {
+      margin-top: 48px;
+      text-align: center;
+      width: 100%;
+    }
+    h1 {
+      font-size: 2.2rem;
+      color: #ffffff; 
+      font-weight: 700;
+      margin-bottom: 0.13em;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 8px rgba(20,208,222,0.07);
+      opacity: 0;
+      animation: fadeInDown 850ms ease-out forwards;
+    }
+    @keyframes fadeInDown {
+      to { opacity: 1; transform: none; }
+      from { opacity: 0; transform: translateY(-32px) scale(0.97);}
+    }
+    .subtitle {
+      color: #e0e0e0; 
+      font-size: 1.18rem;
+      margin-bottom: 38px;
+      font-weight: 500;
+      letter-spacing: 0.015em;
+      text-shadow: 0 2px 7px rgba(20,208,222,0.05);
+      opacity: 0;
+      animation: fadeInUp 950ms 300ms ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: none; }
+      from { opacity: 0; transform: translateY(28px) scale(0.98);}
+    }
+    .form-box {
+      color: #000000;
+      border-radius: 18px;
+      box-shadow: 0 12px 42px rgba(36,200,222,0.17), 0 1.5px 0 #12acae;
+      padding: 42px 28px 30px 28px;
+      display: inline-block;
+      min-width: 270px;
+      max-width: 95vw;
+      transition: box-shadow 0.22s, background 0.22s;
+      border: 1.5px solid #161717;
+      opacity: 0;
+      animation: popIn 1100ms 380ms cubic-bezier(.25,1.7,.5,1.2) forwards;
+    }
+    @keyframes popIn {
+      to { opacity: 1; transform: none; }
+      from { opacity: 0; transform: scale(0.88);}
+    }
+    .form-box label {
+      color: #ffffff;
+      text-align: left;
+      display: block;
+      margin-bottom: 7px;
+      font-size: 1.07em;
+      font-weight: 600;
+      letter-spacing: 0.035em;
+      opacity: 0;
+      animation: fadeLabel 900ms 640ms ease-out forwards;
+    }
+    @keyframes fadeLabel { to {opacity:1;} from {opacity:0;} }
+    .form-box input {
+      box-sizing: border-box;
+      width: 100%;
+      padding: 13px 11px;
+      margin-bottom: 21px;
+      border: none;
+      border-radius: 7px;
+      background: rgba(21, 20, 20, 0.3); 
+      color: #ffffff;
+      font-size: 1.08em;
+      outline: none;
+      font-weight: 500;
+      box-shadow: 0 0.5px 0 #14d0de;
+      transition: background 0.18s, box-shadow 0.18s;
+      opacity: 0;
+      animation: fadeField 800ms 720ms ease-out forwards;
+    }
+    .form-box input::placeholder { /* Placeholder color change */
+      color: rgba(255, 255, 255, 0.75);
+    }
+    @keyframes fadeField { to {opacity:1;} from {opacity:0;} }
+    .form-box input:focus {
+      background: rgba(35,35,35,0.65);
+      background: #232323;
+      box-shadow: 0 0 6px #14d0de;
+    }
+    .form-box button {
+      width: 100%;
+      background: #ffffff;
+      color: #101010;
+      border: none;
+      padding: 14px 0;
+      border-radius: 8px;
+      font-size: 1.15em;
+      font-weight: 700;
+      cursor: pointer;
+      letter-spacing: 0.04em;
+      margin-top: 10px;
+      box-shadow: 0 4px 18px rgba(36,200,222,0.13), 0 0.5px 0 #e1fcfd;
+      transition: background 0.18s, color 0.16s, transform 0.1s;
+      opacity: 0;
+      animation: fadeButton 800ms 900ms ease-in forwards;
+      position: relative;
+    }
+    @keyframes fadeButton { to {opacity:1;} from {opacity:0;} }
+    .form-box button:hover:enabled {
+      background: #ffffff;
+      color: #000000;
+      transform: translateY(-2px) scale(1.03);
+    }
+    .spinner {
+      display: none;
+      width: 23px;
+      height: 23px;
+      border: 3.3px solid #fff;
+      border-top: 3.3px solid #14d0de;
+      border-radius: 50%;
+      animation: spin 0.9s linear infinite;
+      position: absolute;
+      left: 50%;
+      top: 120%;
+      transform: translateX(-50%);
+      margin-top: 5px;
+      z-index: 2;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg) translateX(-50%); }
+    }
+    .thank-you {
+      color: #14d0de;
+      border-radius: 15px;
+      margin-top: 36px;
+      padding: 21px 10px;
+      display: none;
+      font-size: 1.13em;
+      font-weight: 600;
+      box-shadow: 0 2px 14px rgba(20,208,222,0.09);
+      width: 95vw;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
+      letter-spacing: 0.025em;
+      border: 1.5px solid #18191a;
+      opacity: 0.0;
+      animation: fadeInThank 700ms ease-out forwards;
+    }
+    @keyframes fadeInThank { to {opacity:1;} from {opacity:0;} }
+    .extra-info {
+      margin: 38px auto 0 auto;
+      max-width: 430px;
+      color:#000000;
+      color: #e1fcfd;
+      border-radius: 14px;
+      padding: 22px 14px 16px 14px;
+      font-size: 1em;
+      font-weight: 500;
+      box-shadow: 0 6px 20px rgba(20,208,222,0.07);
+      letter-spacing: 0.01em;
+      border: 1px solid #18191a;
+      opacity: 0;
+      animation: fadeInExtra 1000ms 700ms ease-out forwards;
+    }
+    .extra-info h2 {
+      font-size: 1.15em;
+      color: #14d0de;
+      margin-bottom: 12px;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      text-align: left;
+    }
+    .extra-info ul {
+      text-align: left;
+      padding-left: 18px;
+      margin: 0 0 13px 0;
+    }
+    .extra-info li {
+      margin-bottom: 9px;
+      line-height: 1.5;
+    }
+    .extra-info .contact {
+      text-align: left;
+      margin-top: 7px;
+      font-size: 0.99em;
+      color: #8feff6;
+    }
+    .extra-info .note {
+      font-size: 0.89em;
+      color: #90dde5;
+      margin-top: 13px;
+      font-style: italic;
+      letter-spacing: 0.01em;
+      text-align: left;
+    }
+    .extra-info .socials {
+      margin-top: 10px;
+      text-align: left;
+    }
+    .extra-info .socials a {
+      display: inline-block;
+      margin-right: 12px;
+      color: #14d0de;
+      font-size: 1.09em;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.14s;
+    }
+    .extra-info .socials a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+    @keyframes fadeInExtra { to {opacity: 1;} from {opacity: 0;} }
+    @media (max-width: 480px) {
+      body {
+        background-attachment: scroll; /* Better performance on mobile */
+        background-position: center top; /* Better mobile positioning */
+      }
+      .form-box, .extra-info { padding: 11px 1vw; }
+      h1 { font-size: 1.4rem; }
+      .subtitle { font-size: 1em; }
+      .thank-you, .extra-info { font-size: .97em; padding: 9px 2px;}
+    }
+    
+    /* Additional mobile optimization for smaller screens */
+    @media (max-width: 320px) {
+      body {
+        background-size: 100% auto; /* Better fit for very small screens */
+      }
+    }
+    
+    /* Tablet optimization */
+    @media (min-width: 481px) and (max-width: 768px) {
+      body {
+        background-size: cover;
+        background-position: center 30%; /* Better composition for tablets */
+      }
+    }
+  
+    /* Dark overlay above background image */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 0;
+    }
+    /* ensure content stays above overlay */
+    .container, .form-box, .extra-info, .thank-you {
+      position: relative;
+      z-index: 1;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Be the First One – NexKirana</h1>
+    <div class="subtitle">
+      Register now to join our exclusive list for India’s next big local grocery revolution.
+    </div>
+    <div class="form-box" id="register-form-box" style="position:relative;">
+      <form id="signup-form" autocomplete="off">
+        <label for="name">Customer Name</label>
+        <input type="text" id="name" required placeholder="Enter your name" />
+
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required maxlength="10" pattern="[0-9]{10}" placeholder="10-digit mobile no." />
+
+        <label for="city">City/Area</label>
+        <input type="text" id="city" required placeholder="Your city or locality" />
+
+        <button type="submit" id="submitBtn">Register Now</button>
+        <div class="spinner" id="spinner"></div>
+      </form>
+    </div>
+    <div class="thank-you" id="thankYouMsg">
+      Thank you for registering! You are now on our exclusive early bird list.<br>
+      We’ll keep you posted as NexKirana launches.
+    </div>
+    <div class="extra-info" id="extraInfo">
+      <h2>Why Join NexKirana?</h2>
+      <ul>
+        <li>Fast, reliable delivery from local shops in your area</li>
+        <li>Exclusive early access to offers and updates</li>
+        <li>Customer-focused support</li>
+        <li>Secure ordering and privacy protection</li>
+      </ul>
+      <div class="contact">
+        Contact us at <a href="mailto:contact.nexkirana@gmail.com">contact.nexkirana@gmail.com</a>
+      </div>
+      <div class="socials">
+        Follow us:
+        <a href="https://instagram.com/nexkirana" target="_blank" rel="noopener">Instagram (@nexkirana)</a>
+        <a href="https://twitter.com/" target="_blank" rel="noopener">X</a>
+      </div>
+      <div class="note">
+        Your information is safe. We never spam or share data.
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase App (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
+  <!-- Firestore (compat) -->
+  <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore-compat.js"></script>
+  <script>
+    // Firebase project credentials
+    const firebaseConfig = {
+      apiKey: "AIzaSyBQmR1uFM2ZyoOjNmyw787hkyomagyq29k",
+      authDomain: "nexkirana-signup.firebaseapp.com",
+      projectId: "nexkirana-signup",
+      storageBucket: "nexkirana-signup.firebasestorage.app",
+      messagingSenderId: "222042738882",
+      appId: "1:222042738882:web:9d339325a13a26788f6b5b"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Handle form submission with loader spinner
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const submitBtn = document.getElementById('submitBtn');
+      const spinner = document.getElementById('spinner');
+      submitBtn.disabled = true;
+      spinner.style.display = 'block';
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const city = document.getElementById('city').value.trim();
+
+      db.collection('signups').add({
+        name: name,
+        phone: phone,
+        city: city,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+      }).then(() => {
+        document.getElementById('signup-form').style.display = 'none';
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+        const thankYou = document.getElementById('thankYouMsg');
+        thankYou.style.display = 'block';
+        thankYou.style.animation = "fadeInThank 700ms ease-out forwards";
+      }).catch((error) => {
+        spinner.style.display = 'none';
+        submitBtn.disabled = false;
+        alert('Error. Please try again.');
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>
